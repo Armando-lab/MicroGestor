@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumen Financiero de la Empresa</title>
+    <style>
+        body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 375px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.header {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+}
+
+.logo {
+    background-color: #2980b9;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 10px auto;
+}
+
+.selector-grafico {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.grafico-container {
+    padding: 20px;
+}
+
+.informacion-financiera {
+    padding: 20px;
+    background-color: #ecf0f1;
+}
+
+.notificaciones {
+    background-color: #d35400;
+    color: white;
+    padding: 20px;
+}
+
+.notificaciones h2 {
+    margin-top: 0;
+}
+
+/* Estilos adicionales para los select */
+select {
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #34495e;
+}
+
+/* Ajustes para el canvas del gráfico */
+#grafico-finanzas {
+    width: 100%;
+    height: auto;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span>Foto</span> <!-- Aquí iría la imagen/logo de la empresa -->
+            </div>
+            <h1>Resumen de la empresa NombreDeEmpresa</h1>
+        </div>
+
+        <div class="selector-grafico">
+            <select id="tipo-grafico">
+                <option value="ventas">Ventas</option>
+                <!-- Otras opciones -->
+            </select>
+            <select id="periodo">
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <!-- Otros periodos -->
+            </select>
+        </div>
+
+        <div class="grafico-container">
+            <canvas id="grafico-finanzas"></canvas> <!-- Canvas para el gráfico -->
+        </div>
+
+        <div class="informacion-financiera">
+            <h2>Información:</h2>
+            <p>Ventas</p>
+            <h2>Intervalo:</h2>
+            <p>2023 $2,000</p>
+            <p>2024 $5,000</p>
+            <p>Incremento $3,000</p>
+        </div>
+
+        <div class="notificaciones">
+            <h2>Notificaciones importantes:</h2>
+            <!-- Alertas o notificaciones importantes aquí -->
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Asegúrate de que el DOM esté completamente cargado antes de intentar obtener el contexto del canvas y crear el gráfico.
+        document.addEventListener('DOMContentLoaded', function () {
+        const ctx = document.getElementById('grafico-finanzas').getContext('2d');
+        const graficoFinanzas = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Ventas', 'Inversiones', 'Gastos', 'Otros'],
+                datasets: [{
+                    label: 'Distribución financiera',
+                    data: [10, 20, 30, 40],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+        });
+
+
+        // Suponiendo que tienes Chart.js incluido en tu proyecto
+        const ctx = document.getElementById('grafico-finanzas').getContext('2d');
+        const graficoFinanzas = new Chart(ctx, {
+            type: 'pie', // Tipo de gráfico
+            data: {
+                labels: ['Ventas', 'Inversiones', 'Gastos', 'Otros'],
+                datasets: [{
+                    label: 'Distribución financiera',
+                    data: [10, 20, 30, 40], // Estos datos se actualizarían dinámicamente
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            }
+        });
+
+    </script>
+</body>
+</html>

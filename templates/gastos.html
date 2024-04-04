@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Registro de Gastos</title>
+<style>
+    /* Asumiendo que tienes estilos similares a los que se ven en la imagen */
+.gasto-container {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 20px;
+  width: 90%;
+  max-width: 400px;
+  margin: auto;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.valor-total-gasto, .categoria, .anotacion {
+  margin-bottom: 15px;
+}
+
+.input-valor-total, .input-anotacion {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: right;
+}
+
+.btn-registrar-gasto {
+  width: 100%;
+  padding: 10px;
+  background-color: #ff6b6b;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.modal-categoria {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 8px;
+}
+
+.close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal-categoria-opcion {
+  padding: 10px;
+  margin-top: 8px;
+  background: #f2f2f2;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.modal-categoria-opcion:hover {
+  background: #e6e6e6;
+}
+
+</style>
+</head>
+<body>
+
+<div class="gasto-container">
+  <div class="valor-total-gasto">
+    <span>💸 Valor total del gasto</span>
+    <input type="text" id="valor-total" class="input-valor-total" placeholder="$0.00">
+  </div>
+
+  <div class="anotacion">
+    <span>Anotación</span>
+    <input type="text" class="input-anotacion" placeholder="Escribe una nota...">
+  </div>
+    
+  <div class="categoria" onclick="openModal()">
+    <span>Categoría:</span>
+    <h3 id="categoria-seleccionada">Renta</h3>
+  </div>
+
+  <button class="btn-registrar-gasto">Registrar gasto</button>
+</div>
+
+<!-- Modal Categoría -->
+<div id="modal-categoria" class="modal-categoria" style="display:none;">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal()">×</span>
+    <div class="modal-categoria-opcion" onclick="setCategoria('Renta')">🏠 Renta</div>
+    <div class="modal-categoria-opcion" onclick="setCategoria('Proveedor')">👨‍💼 Proveedor</div>
+    <div class="modal-categoria-opcion" onclick="setCategoria('Servicios')">💡 Servicios</div>
+    <div class="modal-categoria-opcion" onclick="setCategoria('Otros')">🔧 Otros</div>
+  </div>
+</div>
+
+<script>
+    // script.js
+function openModal() {
+  document.getElementById('modal-categoria').style.display = 'block';
+}
+
+function closeModal() {
+  document.getElementById('modal-categoria').style.display = 'none';
+}
+
+function setCategoria(categoria) {
+  document.getElementById('categoria-seleccionada').textContent = categoria;
+  closeModal();
+}
+
+// Aquí podrías agregar la lógica para el registro de gastos
+
+</script>
+
+</body>
+</html>

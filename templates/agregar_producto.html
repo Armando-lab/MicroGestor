@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar Producto</title>
+<style>
+  .add-product-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #FFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+      margin-bottom: 15px;
+  }
+
+  .form-group label {
+      display: block;
+      margin-bottom: 5px;
+  }
+
+  #add-product-form > input, #add-product-form select, #add-product-form textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #CCC;
+  }
+
+  #add-product-form > input {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+  }
+
+  #add-product-form > button {
+      padding: 10px 20px;
+      background-color: #6A5ACD;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 20px auto 0;
+  }
+
+  #add-product-form > button:hover {
+      background-color: #483D8B;
+  }
+
+  #preview-image {
+      display: none;
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      margin-top: 10px;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="add-product-container">
+      <h2>Agregar nuevo producto</h2>
+      <form id="add-product-form">
+          <div class="form-group">
+              <label for="product-image">Imagen del producto:</label>
+              <input type="file" id="product-image" accept="image/*" required>
+              <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display: none;">
+          </div>
+          
+          <div class="form-group">
+              <label for="product-name">Nombre del producto:</label>
+              <input type="text" id="product-name" placeholder="Nombre del producto" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="purchase-unit">Unidad de compra:</label>
+            <select id="purchase-unit" onchange="syncSaleUnitWithPurchaseUnit()">
+                <option value="unidad">por unidad</option>  
+                <option value="kg">kg</option>
+                <option value="gr">gr</option>
+                <option value="L">L</option>
+                <option value="ml">ml</option>
+            </select>
+        </div>
+          
+          <div class="form-group">
+              <label for="unit-cost">Costo unitario:</label>
+              <input type="number" id="unit-cost" placeholder="Costo unitario" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="sale-unit">Unidad de venta:</label>
+            <select id="sale-unit">
+                <option value="unidad">por unidad</option>
+                <option value="kg">kg</option>
+                <option value="gr">gr</option>
+                <option value="L">L</option>
+                <option value="ml">ml</option>
+                
+            </select>
+        </div>
+          
+          <div class="form-group">
+              <label for="unit-price">Precio unitario:</label>
+              <input type="number" id="unit-price" placeholder="Precio unitario" required>
+          </div>
+          
+          <div class="form-group">
+              <label for="description">Descripción (opcional):</label>
+              <textarea id="description" placeholder="Escribe una descripción..."></textarea>
+          </div>
+          
+          <button type="submit">Guardar Producto</button>
+      </form>
+  </div>
+  
+  <script>
+    function syncSaleUnitWithPurchaseUnit() {
+    const purchaseUnit = document.getElementById('purchase-unit').value;
+    const saleUnitSelect = document.getElementById('sale-unit');
+
+    // Si la unidad de compra es 'por unidad', ajusta la unidad de venta correspondientemente
+    if (purchaseUnit === 'unidad') {
+        saleUnitSelect.value = 'unidad';
+    }
+     saleUnitSelect.disabled = (purchaseUnit === 'unidad');
+  }
+    document.getElementById('product-image').addEventListener('change', function(e) {
+          const [file] = e.target.files;
+          const preview = document.getElementById('preview-image');
+          if (file) {
+              const reader = new FileReader();
+              reader.onload = e => {
+                  preview.src = e.target.result;
+                  preview.style.display = 'block';
+              };
+              reader.readAsDataURL(file);
+          }
+      });
+
+  </script>
+  </body>
+</html>
