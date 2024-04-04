@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700;900&display=swap">
+<title>Ventas Móvil</title>
+<style>
+/* Estilos CSS aquí */
+
+/* Estilos generales */
+.body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Estilos de la barra de navegación */
+.navbar {
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px; /* Se ajusta el padding */
+  box-sizing: border-box; /* Se especifica el box-sizing */
+  overflow: hidden;
+  flex-shrink: 0;
+  height: 60px;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+  gap: 20px;
+  text-align: center;
+  font-size: 12px;
+  color: #fffdfd;
+  font-family: Inter;
+}
+
+.logo {
+  height: 40px;
+  width: 40px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.logo1 {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 15px);
+  display: inline-block;
+  width: 30px;
+  height: 16px;
+  min-width: 30px;
+  z-index: 1;
+}
+
+.buttonburger-icon {
+  height: 40px;
+  width: 40px;
+  position: relative;
+  min-height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  margin-right: 20px; /* Se agrega margen derecho */
+}
+
+.buttonburger-icon span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background: #333;
+  margin: 5px 0;
+}
+
+.lista-ventas {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #333c87, #141a48);
+}
+
+/* Estilos de la lista de ventas */
+.lista-ventas1 {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px 0; /* Se agrega padding arriba y abajo */
+  justify-content: space-between; /* Se ajusta la distribución */
+}
+
+.card-costos {
+  flex: 0 1 calc(33.333% - 20px); /* Cambiar la distribución de las tarjetas */
+  border-radius: 20px; /* Aumentar el radio de borde */
+  overflow: hidden;
+  background-color: #f8f8f8; /* Cambiar el color de fondo */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Cambiar la sombra */
+  padding: 20px;
+  box-sizing: border-box; /* Se especifica el box-sizing */
+}
+
+.imagen-producto,
+.imagen-producto1 {
+  width: 100%;
+  height: auto;
+  border-radius: 20px; /* Aumentar el radio de borde */
+  object-fit: cover; /* Ajustar la imagen al contenedor */
+}
+
+.nombre-producto1 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.entypodots-three-vertical-icon,
+.entypodots-three-vertical-icon1 {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.entypodots-three-vertical-icon span,
+.entypodots-three-vertical-icon1 span {
+  display: block;
+  width: 4px;
+  height: 4px;
+  background: #333;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+.boton-agregar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: blue;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+}
+
+/* Estilos para la ventana modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Reglas de medios para hacer el diseño responsive */
+@media screen and (max-width: 768px) {
+  .navbar {
+    padding: 10px 0; /* Reducir el padding vertical */
+  }
+
+  .logo {
+    width: auto; /* Permitir que el logo se ajuste automáticamente */
+  }
+
+  .logo1 {
+    display: none; /* Ocultar el logo1 en pantallas pequeñas */
+  }
+
+  .buttonburger-icon {
+    margin-right: 10px; /* Agregar un margen derecho al botón de hamburguesa */
+  }
+
+  .lista-ventas1 {
+    flex-direction: column; /* Cambiar la dirección del flexbox a columna */
+    align-items: center; /* Centrar los elementos hijos horizontalmente */
+    padding: 20px; /* Agregar padding */
+  }
+
+  .card-costos {
+    flex: 0 1 calc(100% - 20px); /* Hacer que las tarjetas ocupen todo el ancho disponible */
+    margin-bottom: 20px; /* Agregar margen inferior */
+  }
+}
+</style>
+</head>
+<body>
+<div class="ventas-movil">
+  <header class="navbar">
+    <!-- Botón de hamburguesa -->
+    <button class="buttonburger-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="logo">
+      <div class="lista-ventas"></div>
+      <div class="logo1">Logo</div>
+    </div>
+
+    <!-- Botón de tres puntos para registrar venta -->
+  </header>
+  <main class="nombre-producto container">
+    <section class="lista-ventas1">
+      <div class="card-costos">
+        <div class="nombre-producto1">
+          <textarea class="imagen-producto" placeholder="Imagen del producto" rows="8" cols="8"></textarea>
+          <div class="entypodotsthreevertical">
+            <button class="entypodots-three-vertical-icon" onclick="toggleRegistrarVenta()">
+              <!-- Tres puntos -->
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="contenido-costos">
+          <p class="descripcion-producto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue.</p>
+          <p class="precio">Precio: $1200 MXN</p>
+        </div>
+      </div> 
+      <div></div>
+      <div class="card-costos">
+        <div class="nombre-producto1">
+          <textarea class="imagen-producto" placeholder="Imagen del producto" rows="8" cols="8"></textarea>
+          <div class="entypodotsthreevertical">
+            <button class="entypodots-three-vertical-icon" onclick="toggleRegistrarVenta()">
+              <!-- Tres puntos -->
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+        <div class="contenido-costos">
+          <p class="descripcion-producto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue.</p>
+          <p class="precio">Precio: $1200 MXN</p>
+        </div>
+      </div>      
+      </div>
+    </section>
+  </main>
+</div>
+<button class="boton-agregar" onclick="agregarCardCostos()">+</button>
+<script>
+// Funciones JavaScript aquí
+function toggleMenu() {
+  var nav = document.querySelector('.navbar');
+  nav.classList.toggle('menu-open');
+}
+
+function toggleRegistrarVenta() {
+  var modal = document.getElementById("registrarVentaModal");
+  modal.style.display = modal.style.display === "block" ? "none" : "block";
+}
+
+function agregarCardCostos() {
+  var nuevaCardCostos = document.createElement("div");
+  nuevaCardCostos.className = "card-costos";
+  
+  nuevaCardCostos.innerHTML = `
+    <div class="nombre-producto1">
+      <textarea class="imagen-producto" placeholder="Imagen del producto" rows="8" cols="8"></textarea>
+      <div class="entypodotsthreevertical">
+        <button class="entypodots-three-vertical-icon" onclick="toggleRegistrarVenta()">
+          <!-- Tres puntos -->
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+    <div class="contenido-costos">
+      <p class="descripcion-producto">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien fringilla, mattis ligula consectetur, ultrices mauris. Maecenas vitae mattis tellus. Nullam quis imperdiet augue.</p>
+      <p class="precio">Precio: $1200 MXN</p>
+    </div>
+  `;
+  
+  var listaVentas1 = document.querySelector(".lista-ventas1");
+  listaVentas1.appendChild(nuevaCardCostos);
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+
+<style>
+    .caja{
+        margin: 10%;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    .carousel {
+        position: relative;
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .carousel-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .carousel-item {
+        flex: 0 0 100%;
+        width: 100%;
+        height: 100%;
+    }
+
+    .carousel-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .carousel-controls {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-control {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #fff;
+        margin: 0 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .carousel-control.active {
+        background-color: #000;
+    }
+
+    @media (max-width: 768px) {
+    .carousel {
+        height: 300px;
+    }
+    }
+
+    @media (max-width: 480px) {
+    .carousel {
+        height: 200px;
+    }
+    }
+
+</style>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="/static/LogoImage.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a href="{{ url_for('login') }}" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('registro') }}" class="nav-link">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('crear_empresa') }}" class="nav-link">Crear mi negocio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('mi_perfil') }}" class="nav-link">Mi perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ url_for('menu') }}" class="nav-link">Menu</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<section class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="/static/Carru4.jpg" alt="Slide 1"/>
+      </div>
+      <div class="carousel-item">
+        <img src="https://img.freepik.com/vector-gratis/inversor-laptop-monitoreando-crecimiento-dividendos-comerciante-sentado-sobre-pila-dinero-invertir-capital-analizar-graficos-ganancias-ilustracion-vector-finanzas-comercio-acciones-inversion_74855-8432.jpg" alt="Slide 2"/>
+      </div>
+      <div class="carousel-item">
+      <img src="https://www.gob.mx/cms/uploads/article/main_image/66154/10062017-326A8963_2.jpg" alt="Slide 3"/>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <span class="carousel-control active"></span>
+      <span class="carousel-control"></span>
+      <span class="carousel-control"></span>
+    </div>
+  </section>
+
+  <div class="container mt-5">
+    <div class="row">
+        <!-- Tarjeta 1: Lecciones para ti -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Lecciones para ti</h5>
+                    <p class="card-text">Aprenda sobre más de su negocio con el mejor aliado.</p>
+                    <img src="https://www.pmfarma.com/articulos/contenido/2945/image/aprendizaje.jpg" width="350" height=230" class="d-inline-block align-text-top">
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta 2: Hecho para ti -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Hecho para ti</h5>
+                    <p class="card-text">Fácil de usar, fácil de aprender y entender.</p>
+                    <img src="https://i.workana.com/wp-content/uploads/2019/09/responsive-design-glosario-workana.jpg" width="350" height=255" class="d-inline-block align-text-top">
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta 3: Ingresa desde cualquier lugar -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Ingresa desde cualquier lugar</h5>
+                    <p class="card-text">Un teléfono celular, tablet o computadora, no importa donde estés mientras tengas una conexión a internet.</p>
+                    <img src="https://noticias.atura.mx/api/ckfinder/files/accesibilidad.jpg" width="300" height=230" class="d-inline-block align-text-top">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="caja">
+    <form class="form-control" action="acceso-login" method="post">     
+        <h1>Forma parte de una gran comunidad de emprendedores dispuestos a crecer</h1>
+        <div class="form-group">
+        </div>
+    </form>
+</div>
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const items = document.querySelectorAll('.carousel-item');
+      const controls = document.querySelectorAll('.carousel-control');
+
+      let currentIndex = 0;
+
+      function setActiveItem(index) {
+        items[currentIndex].classList.remove('active');
+        items[index].classList.add('active');
+        controls[currentIndex].classList.remove('active');
+        controls[index].classList.add('active');
+        currentIndex = index;
+      }
+
+      controls.forEach((control, index) => {
+        control.addEventListener('click', () => setActiveItem(index));
+      });
+
+      // Inicializa el primer elemento como activo
+      items[0].classList.add('active');
+      controls[0].classList.add('active');
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('.carousel-item');
+    const controls = document.querySelectorAll('.carousel-control');
+
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    function setActiveItem(index) {
+        items[currentIndex].classList.remove('active');
+        items[index].classList.add('active');
+        controls[currentIndex].classList.remove('active');
+        controls[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    function moveToNextItem() {
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= items.length) {
+        nextIndex = 0;
+        }
+        setActiveItem(nextIndex);
+    }
+
+    controls.forEach((control, index) => {
+        control.addEventListener('click', () => {
+        setActiveItem(index);
+        // Restablecer el intervalo cada vez que el usuario cambia manualmente de diapositiva
+        clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(moveToNextItem, 5000); // Cambiar cada 5 segundos
+        });
+    });
+
+    // Inicializa el primer elemento como activo
+    items[0].classList.add('active');
+    controls[0].classList.add('active');
+
+    // Comenzar la transición automática
+    autoSlideInterval = setInterval(moveToNextItem, 5000); // Cambiar cada 5 segundos
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    const items = document.querySelectorAll('.carousel-item');
+    const controls = document.querySelectorAll('.carousel-control');
+
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    function setActiveItem(index) {
+        items[currentIndex].classList.remove('active');
+        items[index].classList.add('active');
+        controls[currentIndex].classList.remove('active');
+        controls[index].classList.add('active');
+        currentIndex = index;
+    }
+
+    function moveToNextItem() {
+        let nextIndex = currentIndex + 1;
+        if (nextIndex >= items.length) {
+            nextIndex = 0;
+        }
+        setActiveItem(nextIndex);
+    }
+
+    controls.forEach((control, index) => {
+        control.addEventListener('click', () => {
+            setActiveItem(index);
+            clearInterval(autoSlideInterval);
+            autoSlideInterval = setInterval(moveToNextItem, 5000);
+        });
+    });
+
+    autoSlideInterval = setInterval(moveToNextItem, 5000);
+});
+
+    </script>
+
+</body>
+</html>
