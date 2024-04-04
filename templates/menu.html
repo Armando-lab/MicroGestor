@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bienvenida</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+  
+  .container {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .logo {
+    background-color: #0000ff;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    font-weight: bold;
+  }
+
+  .bienvenida {
+    text-align: center;
+    color: #000;
+  }
+
+  .nombre-usuario {
+    color: #0000ff;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .pregunta {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .opciones {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .opcion {
+    background-color: #0000ff;
+    color: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    gap: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+
+  .opcion:hover {
+    background-color: #3333ff;
+  }
+
+  .icon {
+    display: inline-block;
+    width: 30px; /* Ancho fijo para los íconos */
+    height: 30px; /* Altura fija para los íconos */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .icon-resumen {
+    background-image: url('ruta-a-tu-icono-resumen.svg');
+  }
+
+  .icon-inventario {
+    background-image: url('ruta-a-tu-icono-inventario.svg');
+  }
+
+  .icon-ventas {
+    background-image: url('ruta-a-tu-icono-ventas.svg');
+  }
+
+  .icon-costos {
+    background-image: url('ruta-a-tu-icono-costos.svg');
+  }
+
+  .icon-productos {
+    background-image: url('ruta-a-tu-icono-productos.svg');
+  }
+
+  @media (min-width: 640px) {
+    .opciones {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo">Logo</div>
+    <h1 class="bienvenida">Bienvenido</h1>
+    <p class="nombre-usuario">NombreUsuario</p>
+    <p class="pregunta">¿Qué deseas administrar?</p>
+    <div class="opciones">
+        <a href="#resumen-negocio" class="opcion">
+          <div class="icono">📊</div>
+          <span class="texto-opcion">Resumen de negocio</span>
+        </a>
+        <a href="{{ url_for('inventario') }}" class="opcion">
+          <div class="icono">📦</div>
+          <span class="texto-opcion">Inventario</span>
+        </a>
+        <a href="{{ url_for('ventas') }}" class="opcion">
+          <div class="icono">💰</div>
+          <span class="texto-opcion">Ventas</span>
+        </a>
+        <a href="#costos-gastos" class="opcion">
+          <div class="icono">📉</div>
+          <span class="texto-opcion">Costos y gastos</span>
+        </a>
+        <a href="#productos" class="opcion">
+          <div class="icono">➕</div>
+          <span class="texto-opcion">Productos</span>
+        </a>
+      </div>
+  </div>
+</body>
+</html>

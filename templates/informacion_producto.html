@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agregar Producto</title>
+<style>
+  .add-product-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #FFF;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-group {
+      margin-bottom: 15px;
+  }
+
+  .form-group label {
+      display: block;
+      margin-bottom: 5px;
+  }
+
+  .form-group input, .form-group select, .form-group textarea {
+      display: block;
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 4px;
+      border: 1px solid #CCC;
+  }
+
+  .form-group select[disabled] {
+      background-color: #f0f0f0;
+      cursor: not-allowed;
+  }
+
+  #add-product-form > button {
+      padding: 10px 20px;
+      background-color: #6A5ACD;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      display: block;
+      margin: 20px auto 0;
+  }
+
+  #add-product-form > button:hover {
+      background-color: #483D8B;
+  }
+
+  #preview-image {
+      display: none;
+      width: 100%;
+      max-width: 200px;
+      height: auto;
+      margin-top: 10px;
+  }
+
+</style>
+</head>
+<body>
+
+  <div class="add-product-container">
+      <h2>Informacion del Producto</h2>
+      <form id="add-product-form">
+          <div class="form-group">
+              <label for="product-image">Imagen del producto:</label>
+              <!-- Aquí se mostrará la imagen guardada -->
+              <img id="preview-image" src="#" alt="Vista previa de la imagen" style="display: none;">
+          </div>
+          
+          <div class="form-group">
+              <label for="product-name">Nombre del producto:</label>
+              <!-- Aquí se mostrará el nombre del producto guardado -->
+              <input type="text" id="product-name" placeholder="Nombre del producto" readonly required>
+          </div>
+          
+          <div class="form-group">
+            <label for="purchase-unit">Unidad de compra:</label>
+            <!-- Aquí se mostrará la unidad de compra guardada -->
+            <select id="purchase-unit" disabled required>
+                <option value="unidad">por unidad</option>  
+                <option value="kg">kg</option>
+                <option value="gr">gr</option>
+                <option value="L">L</option>
+                <option value="ml">ml</option>
+            </select>
+        </div>
+          
+          <div class="form-group">
+              <label for="unit-cost">Costo unitario:</label>
+              <!-- Aquí se mostrará el costo unitario guardado -->
+              <input type="number" id="unit-cost" placeholder="Costo unitario" readonly required>
+          </div>
+          
+          <div class="form-group">
+            <label for="sale-unit">Unidad de venta:</label>
+            <!-- Aquí se mostrará la unidad de venta guardada -->
+            <select id="sale-unit" disabled required>
+                <option value="unidad">por unidad</option>
+                <option value="kg">kg</option>
+                <option value="gr">gr</option>
+                <option value="L">L</option>
+                <option value="ml">ml</option>
+            </select>
+        </div>
+          
+          <div class="form-group">
+              <label for="unit-price">Precio unitario:</label>
+              <!-- Aquí se mostrará el precio unitario guardado -->
+              <input type="number" id="unit-price" placeholder="Precio unitario" readonly required>
+          </div>
+          
+          <div class="form-group">
+              <label for="description">Descripción (opcional):</label>
+              <!-- Aquí se mostrará la descripción guardada -->
+              <textarea id="description" placeholder="Escribe una descripción..." readonly></textarea>
+          </div>
+          
+          <button type="button" id="edit-button">Editar</button>
+          <button type="button" id="cancel-button" style="display: none;">Cancelar</button>
+          <button type="submit" id="save-button" style="display: none;">Guardar Producto</button>
+      </form>
+  </div>
+  
+  <script>
+    // Función para habilitar la edición de los campos
+    function enableEdit() {
+        const fields = document.querySelectorAll('#add-product-form input, #add-product-form select, #add-product-form textarea');
+        fields.forEach(field => {
+            field.removeAttribute('readonly');
+            field.removeAttribute('disabled');
+        });
+        document.getElementById('edit-button').style.display = 'none';
+        document.getElementById('save-button').style.display = 'block';
+        document.getElementById('cancel-button').style.display = 'block';
+    }
+
+    // Función para cancelar la edición y volver a la visualización de solo lectura
+    function cancelEdit() {
+        const fields = document.querySelectorAll('#add-product-form input, #add-product-form select, #add-product-form textarea');
+        fields.forEach(field => {
+            field.setAttribute('readonly', true);
+            field.setAttribute('disabled', true);
+        });
+        document.getElementById('edit-button').style.display = 'block';
+        document.getElementById('save-button').style.display = 'none';
+        document.getElementById('cancel-button').style.display = 'none';
+    }
+
+    // Event listener para el botón de editar
+    document.getElementById('edit-button').addEventListener('click', enableEdit);
+
+    // Event listener para el botón de cancelar
+    document.getElementById('cancel-button').addEventListener('click', cancelEdit);
+
+    // Aquí necesitarás integrar la lógica para cargar los datos guardados en la base de datos y mostrarlos en los campos correspondientes.
+    // Puedes usar Flask para esto, haciendo peticiones AJAX para obtener los datos y luego llenar los campos del formulario.
+    // Por ejemplo:
+    // 1. Hacer una petición AJAX a una ruta de Flask que devuelva los datos del producto.
+    // 2. Una vez que los datos estén disponibles, llenar los campos del formulario con los datos recibidos.
+
+    // Para la imagen, si se guarda una URL en la base de datos, puedes usar algo como esto:
+    // document.getElementById('preview-image').src = /* URL de la imagen guardada */;
+
+    // Similarmente, para los otros campos, puedes establecer el valor de los campos de entrada, por ejemplo:
+    // document.getElementById('product-name').value = /* Nombre del producto guardado */;
+
+    // Recuerda que este código JavaScript necesita ejecutarse después de que la página se haya cargado completamente.
+    // Puedes hacer esto poniendo el código dentro de un evento 'DOMContentLoaded' o colocándolo al final del cuerpo del documento.
+  </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inventario</title>
+<style>
+    body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #EEE;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #FFF;
+  font-size: 14px;
+}
+
+.total-cost{
+    background-color: #483D8B;
+}
+
+.reference-number{
+    background-color: #483D8B;
+}
+
+
+.inventory-container {
+  background: #FFF;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  max-width: 360px;
+  margin: 20px auto;
+}
+
+.product-card {
+  background: #FFF0F5;
+  border: 1px solid #D8BFD8;
+  border-radius: 8px;
+  padding: 10px;
+  position: relative;
+}
+
+.product-options {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.add-product-btn-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000; 
+}
+
+.info-product-btn-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000; 
+}
+
+.add-product-btn {
+    background-color: #6A5ACD;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Opcional: sombra para el botón */
+    transition: background-color 0.3s;
+}
+
+.add-product-btn:hover {
+    background-color: #483D8B;
+}
+
+@media (min-width: 600px) {
+  .inventory-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .inventory-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+</style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="reference-number">Número de Referencias: <span id="num-references">0</span></div>
+    <div class="total-cost">Costo Total del Inventario: $<span id="total-cost">0</span></div>
+  </div>
+
+  
+  <div class="inventory-container" id="inventory-container">
+    <!-- Los productos se cargarán aquí -->
+  </div>
+  
+  <div class="add-product-btn-container">
+       <a href="{{ url_for('agregar_producto') }}"> <button class="add-product-btn">agregar producto</button>
+  </div>
+  <div class="info-product-btn-container">
+    <a href="{{ url_for('informacion_producto') }}"> <button class="add-product-btn">Ver Informacion</button>
+  </div>
+  
+  <script>
+  window.onload = function() {
+  
+  let numReferences = 0; // Inicializa el contador de referencias
+  let totalCost = 0; // Inicializa el total del costo
+
+
+
+    numReferences += 1; // Incrementa el contador de referencias
+    totalCost += product.price * product.quantity; // Suma al total del costo
+ 
+
+    // Muestra el número de referencias y el costo total
+    document.getElementById('num-references').textContent = numReferences;
+    document.getElementById('total-cost').textContent = totalCost.toFixed(2); // Usa toFixed(2) para dos decimales
+  };
+
+  </script>
+  
+  </body>
+</html>

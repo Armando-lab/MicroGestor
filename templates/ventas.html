@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overlock:wght@400;700;900&display=swap">
+<title>Ventas Móvil</title>
+</head>
+<body>
+<div class="ventas-movil">
+  <style>
+.buttonburger-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+  }
+  
+  .buttonburger-icon span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 5px 0;
+  }
+  
+  .entypodots-three-vertical-icon {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    position: relative;
+  }
+  
+  .entypodots-three-vertical-icon span {
+    display: block;
+    width: 4px;
+    height: 4px;
+    background: #333;
+    border-radius: 50%;
+    margin: 2px;
+  }
+  
+  .boton-agregar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+  }
+  
+  .boton-agregar:focus {
+    outline: none;
+  }
+  
+  /* Estilos para la ventana modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  
+  .lista-ventas {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #333c87, #141a48);
+  }
+  
+  .logo1 {
+    position: absolute;
+    top: calc(50% - 8px);
+    left: calc(50% - 15px);
+    display: inline-block;
+    width: 30px;
+    height: 16px;
+    min-width: 30px;
+    z-index: 1;
+  }
+  
+  .logo,
+  .navbar {
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .logo {
+    height: 40px;
+    width: 40px;
+    position: relative;
+  }
+  
+  .navbar {
+    align-self: stretch;
+    height: 60px;
+    background-color: #f4f4f4;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    top: 0;
+    z-index: 99;
+    position: sticky;
+    gap: 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #fffdfd;
+    font-family: Inter;
+  }
+  
+  .campo-texto,
+  .nombre-de-usuario {
+    align-self: stretch;
+    position: relative;
+  }
+  
+  .campo-texto {
+    border: 1px solid #000;
+    outline: 0;
+    background-color: #fff;
+    height: 37px;
+    border-radius: 16px;
+    box-shadow: 4px 8px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    overflow: hidden;
+    flex-shrink: 0;
+    min-width: 199px;
+  }
+  
+  .campo-texto-encabezado,
+  .imagen-producto {
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  .campo-texto-encabezado {
+    align-self: stretch;
+    flex-direction: column;
+    padding: 8px 7px 8px 8px;
+    gap: 4px;
+    text-align: left;
+    font-size: 12px;
+    font-family: Inter;
+  }
+  
+  .imagen-producto {
+    border: 0;
+    background-color: #6a6a6a;
+    height: 157px;
+    width: auto;
+    outline: 0;
+    flex: 1;
+    flex-direction: row;
+    padding: 68px 14px;
+    box-sizing: border-box;
+    font-family: Overlock;
+    font-size: 16px;
+    color: #fff;
+    min-width: 105px;
+  }
+  
+  .nombre-del-producto {
+    margin: 0;
+    align-self: stretch;
+    position: relative;
+    font-size: inherit;
+    font-weight: 400;
+    font-family: inherit;
+  }
+  
+  .m-x-n,
+  .nombre-del-producto-wrapper {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  .nombre-del-producto-wrapper {
+    width: 146px;
+    flex-direction: column;
+    padding: 54.5px 0 0;
+    box-sizing: border-box;
+    min-width: 146px;
+  }
+  
+  .m-x-n {
+    flex: 1;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    flex-direction: row;
+    gap: 16px;
+    min-width: 211px;
+    max-width: 100%;
+  }
+  
+  .entypodots-three-vertical-icon {
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+  
+  .entypodotsthreevertical,
+  .nombre-producto1 {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  .entypodotsthreevertical {
+    height: 157px;
+    flex-direction: column;
+    z-index: 1;
+    margin-left: -13px;
+  }
+  
+  .nombre-producto1 {
+    align-self: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    row-gap: 20px;
+    text-align: left;
+  }
+  
+  .lorem-ipsum-dolor {
+    font-size: 12px;
+    color: #6a6a6a;
+  }
+  
+  .lorem-ipsum-dolor,
+  .mxn {
+    align-self: stretch;
+    position: relative;
+  }
+  
+  .card-costos,
+  .imagen-producto1 {
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    box-sizing: border-box;
+  }
+  
+  .card-costos {
+    align-self: stretch;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    flex-direction: column;
+    padding: 8px 2px 8px 8px;
+    gap: 8px;
+    max-width: 100%;
+  }
+  
+  .imagen-producto1 {
+    border: 0;
+    background-color: #6a6a6a;
+    height: 157px;
+    width: auto;
+    outline: 0;
+    flex: 1;
+    flex-direction: row;
+    padding: 68px 14px;
+    font-family: Overlock;
+    font-size: 16px;
+    color: #fff;
+    min-width: 105px;
+  }
+  
+  .nombre-del-producto1 {
+    margin: 0;
+    align-self: stretch;
+    position: relative;
+    font-size: inherit;
+    font-weight: 400;
+    font-family: inherit;
+  }
+  
+  .imagen-producto-parent,
+  .nombre-del-producto-container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  .nombre-del-producto-container {
+    width: 146px;
+    flex-direction: column;
+    padding: 54.5px 0 0;
+    box-sizing: border-box;
+    min-width: 146px;
+  }
+  
+  .imagen-producto-parent {
+    flex: 1;
+    border-radius: 8px;
+    background-color: #fff;
+    overflow: hidden;
+    flex-direction: row;
+    gap: 16px;
+    min-width: 211px;
+    max-width: 100%;
+  }
+  
+  .entypodots-three-vertical-icon1 {
+    width: 20px;
+    height: 20px;
+    position: relative;
+  }
+  
+  .entypodots-three-vertical-wrapper,
+  .nombre-producto2 {
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  .entypodots-three-vertical-wrapper {
+    height: 157px;
+    flex-direction: column;
+    z-index: 1;
+    margin-left: -13px;
+  }
+  
+  .nombre-producto2 {
+    align-self: stretch;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 100%;
+    row-gap: 20px;
+    text-align: left;
+  }
+  
+  .lorem-ipsum-dolor1 {
+    font-size: 12px;
+    color: #6a6a6a;
+  }
+  
+  .lorem-ipsum-dolor1,
+  .mxn1 {
+    align-self: stretch;
+    position: relative;
+  }
+  
+  .card-costos1 {
+    align-self: stretch;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 8px 2px 8px 8px;
+    box-sizing: border-box;
+    gap: 8px;
+    max-width: 100%;
+  }
+  
+  .nombre-del-empleado {
+    align-self: stretch;
+    position: relative;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .boton-plus-icon {
+    height: 40px;
+    width: 40px;
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  
+  .boton-plus {
+    align-self: stretch;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+  }
+  
+  .lista-ventas1,
+  .nombre-del-empleado-parent {
+    overflow: hidden;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+  }
+  
+  .nombre-del-empleado-parent {
+    align-self: stretch;
+    display: flex;
+    padding: 30px 8px 0 8px; /* Cambiado el padding */
+    font-size: 16px;
+  }
+  
+  .lista-ventas1 {
+    flex: 1;
+    padding: 8px 8px 22px;
+    max-width: 100%;
+    text-align: center;
+    font-size: 20px;
+    color: #000;
+    font-family: Overlock;
+  }
+  </style>
+  <header class="navbar">
+    <!-- Botón de hamburguesa -->
+    <button class="buttonburger-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="logo">
+      <div class="lista-ventas"></div>
+      <div class="logo1">Logo</div>
+    </div>
+
+    <!-- Botón de tres puntos para registrar venta -->
+  </header>
+  <main class="nombre-producto">
+    <section class="lista-ventas1">
+          <div class="campo-texto-encabezado">
+            <div class="nombre-de-usuario">Buscar venta</div>
+            <input class="campo-texto" type="text" />
+          </div>
+          <div class="card-costos">
+            <div class="nombre-producto1">
+              <div class="m-x-n">
+                <textarea
+                  class="imagen-producto"
+                  placeholder="Imagen del producto"
+                  rows="{8}"
+                  cols="{8}"
+                >
+                </textarea>
+                <div class="nombre-del-producto-wrapper">
+                  <h2 class="nombre-del-producto">Nombre del producto</h2>
+                </div>
+              </div>
+              <div class="entypodotsthreevertical">
+                <button class="entypodots-three-vertical-icon" onclick="toggleRegistrarVenta()">
+                  <!-- Tres puntos -->
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+            </div>
+            <b class="lorem-ipsum-dolor"
+              >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
+              massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien
+              fringilla, mattis ligula consectetur, ultrices mauris. Maecenas
+              vitae mattis tellus. Nullam quis imperdiet augue.</b
+            >
+            <b class="mxn">$1200 MXN</b>
+          </div>
+          <div class="card-costos1">
+            <div class="nombre-producto2">
+              <div class="imagen-producto-parent">
+                <textarea
+                  class="imagen-producto1"
+                  placeholder="Imagen del producto"
+                  rows="{8}"
+                  cols="{8}"
+                >
+                </textarea>
+                <div class="nombre-del-producto-container">
+                  <h2 class="nombre-del-producto1">Nombre del producto</h2>
+                </div>
+              </div>
+              <div class="entypodots-three-vertical-wrapper">
+                <button class="entypodots-three-vertical-icon" onclick="toggleRegistrarVenta()">
+                  <!-- Tres puntos -->
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+            </div>
+            <b class="lorem-ipsum-dolor1"
+              >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
+              massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien
+              fringilla, mattis ligula consectetur, ultrices mauris. Maecenas
+              vitae mattis tellus. Nullam quis imperdiet augue.</b
+            >
+            <b class="mxn1">$1200 MXN</b>
+          </div>
+          <div class="nombre-del-empleado-parent">
+            <b class="nombre-del-empleado">Registrar venta</b> <button class="boton-agregar" onclick="agregarCardCostos()">+</button>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      function toggleMenu() {
+          // Obtener el menú
+          var menu = document.querySelector('.navbar');
+          // Alternar la clase 'show-menu' para mostrar u ocultar el menú
+          menu.classList.toggle('show-menu');
+        }
+      
+      // Función para mostrar u ocultar la ventana de registrar venta
+      function toggleRegistrarVenta() {
+          var modal = document.getElementById("registrarVentaModal");
+          modal.style.display = modal.style.display === "block" ? "none" : "block";
+        }
+        
+        // Cierra la ventana de registrar venta si el usuario hace clic fuera de ella
+        window.onclick = function (event) {
+          var modal = document.getElementById("registrarVentaModal");
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        };
+        
+        // Función para alternar el menú desplegable al hacer clic en el botón de hamburguesa
+        function toggleMenu() {
+          var nav = document.querySelector('.navbar');
+          nav.classList.toggle('menu-open');
+        }
+      
+        function agregarCardCostos() {
+          // Crear un nuevo elemento div para la card-costos
+          var nuevaCardCostos = document.createElement("div");
+          nuevaCardCostos.className = "card-costos";
+          
+          // Agregar contenido a la nueva card-costos
+          nuevaCardCostos.innerHTML = `
+            <div class="nombre-producto1">
+              <div class="m-x-n">
+                <textarea
+                  class="imagen-producto"
+                  placeholder="Imagen del producto"
+                  rows="{8}"
+                  cols="{8}"
+                >
+                </textarea>
+                <div class="nombre-del-producto-wrapper">
+                  <h2 class="nombre-del-producto">Nombre del producto</h2>
+                </div>
+              </div>
+              <div class="entypodotsthreevertical">
+                <button class="entypodots-three-vertical-icon" onclick="toggleRegistrarVenta()">
+                  <!-- Tres puntos -->
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </button>
+              </div>
+            </div>
+            <b class="lorem-ipsum-dolor"
+              >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut et
+              massa mi. Aliquam in hendrerit urna. Pellentesque sit amet sapien
+              fringilla, mattis ligula consectetur, ultrices mauris. Maecenas
+              vitae mattis tellus. Nullam quis imperdiet augue.</b
+            >
+            <b class="mxn">$1200 MXN</b>
+          `;
+          
+          // Insertar la nueva card-costos al final de lista-ventas1
+          var listaVentas1 = document.querySelector(".lista-ventas1");
+          listaVentas1.appendChild(nuevaCardCostos);
+        }
+    </script>
+  </body>
+</html>
